@@ -1,0 +1,77 @@
+<div class="header-container">
+  <h1>HomeHunt</h1>
+  <div class="buttons-container">
+    <button (click)="goHome()" class="header-button">Go To Home</button>
+    <button (click)="logout()" class="header-button">Logout</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-image-wrapper">
+    <div class="image-section">
+      <img src="../../assets/city1.jpg" alt="Property Image" class="main-image">
+    </div>
+    <div class="form-section">
+      <h1>Add New Property</h1>
+      <form  #propertyForm="ngForm" (ngSubmit)="submitForm()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="property-name">Property Name</label>
+            <input type="text" id="property-name" name="property-name" placeholder="Enter property name" required [(ngModel)]="property.name">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Enter property location" required [(ngModel)]="property.location">
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" placeholder="Enter property price" required [(ngModel)]="property.price">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Enter property description" required [(ngModel)]="property.description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="bedrooms">Bedrooms</label>
+            <input type="number" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms" required [(ngModel)]="property.bedrooms">
+          </div>
+          <div class="form-group">
+            <label for="bathrooms">Bathrooms</label>
+            <input type="number" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required [(ngModel)]="property.bathrooms">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="owner-name">Owner Name</label>
+            <input type="text" id="owner-name" name="owner-name" placeholder="Enter owner's name" required [(ngModel)]="property.owner.name">
+          </div>
+          <div class="form-group">
+            <label for="owner-contact">Owner Contact</label>
+            <input type="text" id="owner-contact" name="owner-contact" placeholder="Enter owner's contact" required [(ngModel)]="property.owner.contact">
+          </div>
+          <div class="form-group">
+            <label for="owner-address">Owner Address</label>
+            <input type="text" id="owner-address" name="owner-address" placeholder="Enter owner's address" required [(ngModel)]="property.owner.address">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="owner-email">Owner Email</label>
+            <input type="text" id="owner-email" name="owner-email" placeholder="Enter owner's email" required [(ngModel)]="property.owner.email">
+          </div>
+          <div class="form-group">
+            <label for="property-image">Property Image</label>
+            <input #imageInput type="file" id="property-image" accept="image/*" (change)="handleFileInput($event)" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <button type="submit" [disabled]="propertyForm.invalid ">Add Property</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

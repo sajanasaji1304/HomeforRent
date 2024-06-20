@@ -1,0 +1,53 @@
+<div>
+    <div class="header-container">
+        <h1 style="color:white;">HomeHunt</h1>
+        <div class="buttons-container">
+            <button (click)="goHome()" class="header-button">Go To Home</button>
+            <button (click)="logout()" class="header-button">Logout</button>
+          </div>
+    </div>
+    
+    <div class="container">
+        <div class="property-list">
+            <div class="property-card" *ngFor="let property of favoriteProperties " (click)="openPropertyDetails(property)">
+              <img [src]="property.image" alt="Property Image">
+              <div class="property-details">
+                <h2>{{ property.name }}</h2>
+                <p class="location">{{ property.location }}</p>
+                <p class="price">{{ property.price }}</p>
+                <p class="description">Bed: {{ property.bedrooms }} Bath: {{ property.bathrooms }}</p>
+                <p class="description">{{ property.description }}</p>
+              </div>
+            </div>
+          </div>
+
+                  
+        <div class="property-sidebar" [class.open]="sidebarOpen">
+            <div class="sidebar-content">
+                <button (click)="closePropertyDetails()">X</button>
+                <img [src]="selectedProperty?.image" alt="Property Image">
+                <div class="property-info">
+                    <div class="property-main-details">
+                        <h2>{{ selectedProperty?.name }}</h2>
+                        <p class="location">{{ selectedProperty?.location }}</p>
+                        <p class="price">{{ selectedProperty?.price }}</p>
+                        <p class="description">{{ selectedProperty?.description }}</p>
+                    </div>
+                    <div class="owner-details">
+                        <h3>Owner Details</h3>
+                        <p class="owner-name"><strong>Name:</strong> {{ selectedProperty?.owner.name }}</p>
+                        <p class="owner-contact"><strong>Contact:</strong> {{ selectedProperty?.owner.contact }}</p>
+                        <p class="owner-address"><strong>Address:</strong> {{ selectedProperty?.owner.address }}</p>
+                        <p class="owner-email"><strong>Email:</strong> {{ selectedProperty?.owner.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="no-favorites" *ngIf="!this.favoriteProperties.length">
+        No favorites to show
+    </div>
+    
+</div>

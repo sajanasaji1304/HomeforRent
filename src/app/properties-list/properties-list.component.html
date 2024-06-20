@@ -1,0 +1,73 @@
+<div>
+    <div class="header-container">
+        <button class="menu-button" (click)="toggleSidebar()">&#9776;</button>
+        <h1>HomeHunt</h1>
+        <form onsubmit="event.preventDefault();" role="search">
+            <input
+                id="search"
+                type="search"
+                placeholder="Search for location"
+                autofocus
+                required
+                [(ngModel)]="searchTerm"
+                name="searchTerm"
+            />
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="property-list">
+            <div class="property-card" *ngFor="let property of pagedProperties | filter:searchTerm" (click)="openPropertyDetails(property)">
+              <img [src]="property.image" alt="Property Image">
+              <div class="property-details">
+                <h2>{{ property.name }}</h2>
+                <p class="location">{{ property.location }}</p>
+                <p class="price">{{ property.price }}</p>
+                <p class="description">Bed: {{ property.bedrooms }} Bath: {{ property.bathrooms }}</p>
+                <p class="description">{{ property.description }}</p>
+                <button style="color: green;" (click)="toggleSelected($event, property)">
+                  {{ property.selected ? 'Added' : 'Add to favorites' }}
+                </button>
+              </div>
+            </div>
+          </div>
+          
+        
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="currentPage === 0">Previous</button>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+        </div>
+        
+        <div class="property-sidebar" [class.open]="sidebarOpen">
+            <div class="sidebar-content">
+                <button class="close-btn" (click)="closePropertyDetails()">X</button>
+                <img [src]="selectedProperty?.image" alt="Property Image">
+                <div class="property-info">
+                    <div class="property-main-details">
+                        <h2>{{ selectedProperty?.name }}</h2>
+                        <p class="location">{{ selectedProperty?.location }}</p>
+                        <p class="price">{{ selectedProperty?.price }}</p>
+                        <p class="description">{{ selectedProperty?.description }}</p>
+                    </div>
+                    <div class="owner-details">
+                        <h3>Owner Details</h3>
+                        <p class="owner-name"><strong>Name:</strong> {{ selectedProperty?.owner.name }}</p>
+                        <p class="owner-contact"><strong>Contact:</strong> {{ selectedProperty?.owner.contact }}</p>
+                        <p class="owner-address"><strong>Address:</strong> {{ selectedProperty?.owner.address }}</p>
+                        <p class="owner-email"><strong>Email:</strong> {{ selectedProperty?.owner.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-sidebar" [class.open]="menuSidebarOpen">
+            <button class="sidemenu-close" (click)="closeSidebar()">X</button>
+            <button type="button" (click)="navigateToAddProperty()">Rent your Property</button>
+            <button type="button" (click)="favorite()">Favorites</button>
+            <button type="button" (click)="logout()" class="logout-btn">Logout
+            </button>
+        </div>
+        
+        
+    </div>
+</div>
